@@ -1,8 +1,13 @@
 from flask import Flask, request
+import os, json
 
 app = Flask(__name__)
 
 from user_input import user_input
+
+with open('keys.json') as f:
+    keys = json.load(f)
+    os.environ['GOOGLE_API_KEY'] = keys["GOOGLE_API_KEY"]
 
 @app.route('/')
 def hello_world():

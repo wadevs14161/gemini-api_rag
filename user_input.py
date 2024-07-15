@@ -10,7 +10,7 @@ def user_input(user_question, db_index):
     new_db = FAISS.load_local(db_index, embeddings, allow_dangerous_deserialization=True) 
     docs = new_db.similarity_search(user_question, top_k=10)
 
-    chain = get_conversational_chain()
+    chain = get_conversational_chain(db_index)
 
     response = chain(
         {"input_documents": docs, "question": user_question}, return_only_outputs=True)
