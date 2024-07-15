@@ -5,9 +5,13 @@ app = Flask(__name__)
 
 from user_input import user_input
 
-with open('keys.json') as f:
-    keys = json.load(f)
-    os.environ['GOOGLE_API_KEY'] = keys["GOOGLE_API_KEY"]
+try:
+    with open('keys.json') as f:
+        keys = json.load(f)
+        os.environ['GOOGLE_API_KEY'] = keys["GOOGLE_API_KEY"]
+except FileNotFoundError:
+    print('keys.json not found. Please provide the GOOGLE_API_KEY in keys.json file.')
+
 
 @app.route('/')
 def hello_world():
